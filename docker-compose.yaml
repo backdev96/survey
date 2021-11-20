@@ -1,0 +1,33 @@
+# версия docker-compose
+version: '3.8'
+
+
+volumes:
+  postgres_data:  
+
+
+services:
+
+  database:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+  web:
+    image: backdev96/trood:latest
+    build: .
+    restart: always
+    command: bash -c "
+             python manage.py loaddata dump.json &&
+             python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    env_file:
+      - ./.env
