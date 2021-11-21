@@ -5,12 +5,11 @@ from rest_framework.response import Response
 
 from survey.models import Survey
 
-from .models import Question, User
+from .models import Question
 from .serializers import QuestionCreateSerializer, QuestionSerializer
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
-    # queryset = Question.objects.all()
 
     def get_serializer_class(self):
         if self.action == 'list' or self.action == 'retrieve':
@@ -33,7 +32,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
     )
     def retrieve(self, request, *args, **kwargs):
         return super(QuestionViewSet, self).retrieve(request, *args, **kwargs)
-    
+
     @swagger_auto_schema(
         operation_summary='Delete question',
     )
@@ -41,7 +40,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
         instance = get_object_or_404(Question, pk=self.kwargs.get('pk'))
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
+
     @swagger_auto_schema(
         operation_summary='Create Question',
         request_body=QuestionCreateSerializer,

@@ -1,14 +1,12 @@
 from django.core.exceptions import ValidationError
-from drf_yasg.utils import swagger_serializer_method
 from rest_framework import serializers
 
 from question.models import Question
 from question.serializers import QuestionCreateSerializer
 
-from .models import Survey, User
+from .models import Survey
 
 
-# Survey Serializers !!!!
 class SurveyListSerializer(serializers.ModelSerializer):
     '''Survey list serializer shows short info about all surveys'''
     class Meta:
@@ -18,7 +16,6 @@ class SurveyListSerializer(serializers.ModelSerializer):
             'description',
         )
         model = Survey
-
 
 
 class SurveyCreateSerializer(SurveyListSerializer):
