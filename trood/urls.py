@@ -7,8 +7,6 @@ from .yasg import urlpatterns as doc_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('survey.urls')),
-    # path('api/', include('question.urls')),
-    path('auth/', include('djoser.urls')),
     path('api-token-auth/', views.obtain_auth_token),
     
 ]
