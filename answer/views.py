@@ -15,8 +15,8 @@ class AnswerViewSet(viewsets.ModelViewSet):
     def get_queryset(self, *args, **kwargs):
         question = get_object_or_404(Question, pk=self.kwargs.get('question_id'),
                                      survey__id=self.kwargs.get("survey_id"))
-        queryset = question.answer_question.all()
-        return queryset
+        # queryset = question.answer_question.all()
+        return question.answer_question.all()
 
     @swagger_auto_schema(
         operation_summary='Delete answer',
