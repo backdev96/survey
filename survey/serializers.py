@@ -16,11 +16,9 @@ class SurveyListSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'description',
-            # 'questions'
         )
         model = Survey
 
-    # questions = QuestionSerializer(read_only=True, many=True)
 
 
 class SurveyCreateSerializer(SurveyListSerializer):
@@ -93,48 +91,3 @@ class SurveyCreateSerializer(SurveyListSerializer):
             question.save()
 
         return instance
-
-
-# class AnswerSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Option
-#         fields = (
-#             'option',
-#         )
-
-#     option = serializers.PrimaryKeyRelatedField(
-#         queryset=Option.objects.all()
-#     )
-
-# class PostServeySerializeer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Attemption
-#         fields = (
-#             'total_correct_answers'
-#         )
-
-
-# class TakeSurveySerializer(serializers.ModelSerializer):
-    # survey = serializers.SerializerMethodField()
-    # questions = QuestionSerializer(many=True, read_only=True)
-
-    # class Meta:
-    #     model = Attemption
-    #     fields = (
-    #         'id',
-    #         'questions',
-    #         'option',
-    #         # 'answer'
-    #         'questions'
-    #     )
-    
-    # option = AnswerSerializer(many=True)
-    # # questions = serializers.SerializerMethodField(read_only=True, many=True)
-    # # option = serializers.PrimaryKeyRelatedField(
-    # #     queryset=Option.objects.all(), many=True
-    # # )
-
-    # # def get_questions(self, obj):
-    # #     survey = self.context['survey']
-    # #     question = Question.objects.filter(survey=survey)
-    # #     return QuestionSerializer(question, many=True).data

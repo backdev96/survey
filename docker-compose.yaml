@@ -23,8 +23,10 @@ services:
     build: .
     restart: always
     command: bash -c "
-             python manage.py loaddata dump.json &&
-             python manage.py runserver 0.0.0.0:8000"
+            python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
     ports:
       - "8000:8000"
     depends_on:

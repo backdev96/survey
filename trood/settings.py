@@ -1,12 +1,10 @@
-import datetime
-from datetime import timedelta
-from pathlib import Path
-import environ
 import os
+
+import environ
 
 env = environ.Env()
 environ.Env.read_env()
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 SECRET_KEY = 'django-insecure-$=u^*#e+(@uuz&*tmolg+kjihed#ph&32@wqh4tnmjj&fdansv'
@@ -14,7 +12,7 @@ SECRET_KEY = 'django-insecure-$=u^*#e+(@uuz&*tmolg+kjihed#ph&32@wqh4tnmjj&fdansv
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 
 APPEND_SLASH = False
 
@@ -26,10 +24,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'survey',
     'drf_yasg',
     'djoser',
-    'question'
+    'question',
+    'answer'
 ]
 
 MIDDLEWARE = [
@@ -62,6 +62,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'trood.wsgi.application'
 
+
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('DB_ENGINE'),
@@ -69,7 +70,7 @@ DATABASES = {
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT')
+        'PORT': os.getenv('DB_PORT'),
     }
 } 
 
