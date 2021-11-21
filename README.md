@@ -1,3 +1,5 @@
+[![survey workflow](https://github.com/backdev96/survey/workflows/CI/badge.svg)](https://github.com/backdev96/survey/actions)
+
 # Survey App
 
   This app allows users to create surveys. Other users are able to answer questions in surveys.
