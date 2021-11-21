@@ -18,8 +18,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         survey = get_object_or_404(Survey, pk=self.kwargs.get('survey_id'))
-        queryset = survey.questions.all()
-        return queryset
+        return survey.questions.all()
 
     @swagger_auto_schema(
         operation_summary='Get list of questions',
