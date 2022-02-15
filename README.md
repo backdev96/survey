@@ -29,6 +29,3 @@ DB_PORT=5432
   - testing API available at swagger/
   - default basic root at api/
 
-#### TO DO:
-    Test api with pytest
-    Add statistics for surveys and questions, maybe for users
