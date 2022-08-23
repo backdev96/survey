@@ -42,7 +42,7 @@ services:
   frontend:
     build:
       context: ./
-      dockerfile: docker/admin/Dockerfile
+      dockerfile: docker/frontend/Dockerfile
     container_name: frontend
     volumes:
       - ./frontend:/app
@@ -61,11 +61,11 @@ services:
     depends_on:
       - api
 
-#  admin:
+#  frontend:
 #    build:
 #      context: ./
-#      dockerfile: docker/admin/Dockerfile
-#    container_name: np-admin-dev
+#      dockerfile: docker/frontend/Dockerfile
+#    container_name: np-frontend-dev
 #    depends_on:
 #      - api
 #    expose:
@@ -75,6 +75,6 @@ services:
 #    environment:
 #      VITE_API_URL: "http://localhost:${NP_API_PORT:-8000}"
 #    volumes:
-#      - ./src/admin/:/app/
+#      - ./src/frontend/:/app/
 #      # Add container-only node modules to avoid huge FS I/O overhead
 #      - /app/node_modules/

@@ -17,7 +17,7 @@ ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 APPEND_SLASH = False
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'django.contrib.frontend',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
