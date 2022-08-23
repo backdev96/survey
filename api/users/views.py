@@ -28,7 +28,7 @@ class RegisterUserAPIView(CreateAPIView):
     serializer_class = RegisterSerializer
 
     @swagger_auto_schema(
-        operation_summary="Login",
+        operation_summary="Register",
         request_body=RegisterSerializer(),
         responses={201: RegisterSerializer()},
     )
