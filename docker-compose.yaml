@@ -7,6 +7,7 @@ volumes:
 services:
   database:
     image: postgres:12.0-alpine
+    container_name: db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
@@ -24,6 +25,7 @@ services:
     build:
       context: ./
       dockerfile: docker/api/Dockerfile
+    container_name: api
     restart: always
     command: bash -c "
       python manage.py migrate &&
@@ -36,6 +38,28 @@ services:
       - ./.env
     volumes:
       - ./api/:/code/api
+
+  frontend:
+    build:
+      context: ./
+      dockerfile: docker/admin/Dockerfile
+    container_name: frontend
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - api
+    ports:
+      - "80:80"
+
+  nginx_backend_server:
+    build:
+      context: ./
+      dockerfile: docker/nginx/Dockerfile
+    container_name: nginx
+    ports:
+      - "8000:8000"
+    depends_on:
+      - api
 
 #  admin:
 #    build:
