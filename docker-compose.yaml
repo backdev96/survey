@@ -27,7 +27,7 @@ services:
     restart: always
     command: bash -c "
       python manage.py migrate &&
-      python manage.py runserver 0.0.0.0:8000"
+      gunicorn -b 0.0.0.0:8000 --worker-class=gevent --worker-connections=1000 --workers=5 trood.wsgi"
     ports:
       - "8000:8000"
     depends_on:
