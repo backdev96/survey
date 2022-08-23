@@ -12,12 +12,12 @@ SECRET_KEY = 'change me'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
 
 APPEND_SLASH = False
 
 INSTALLED_APPS = [
-    'django.contrib.frontend',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -74,6 +74,15 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
+
+CHANNEL_LAYERS = {
+        'default' : {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG' : {
+                "hosts" : [('redis', 6379)], # You are supposed to use service name and not localhost
+                },
+            },
+        }
 
 AUTH_PASSWORD_VALIDATORS = [
     {

@@ -5,6 +5,15 @@ volumes:
   postgres_data:  
 
 services:
+  redis:
+    restart: always
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - db-net
+
   database:
     image: postgres:12.0-alpine
     container_name: db
@@ -20,6 +29,8 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-survey}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-survey}
       DB_NAME: ${POSTGRES_DB:-survey}
+    networks:
+      - db-net
 
   api:
     build:
@@ -28,39 +39,39 @@ services:
     container_name: api
     restart: always
     command: bash -c "
-      python manage.py migrate &&
-      gunicorn -b 0.0.0.0:8000 --worker-class=gevent --worker-connections=1000 --workers=5 trood.wsgi"
-    ports:
-      - "8000:8000"
+                python manage.py migrate &&
+                python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - database
+      - redis
     env_file:
       - ./.env
+    ports:
+      - "8000:8000"
     volumes:
       - ./api/:/code/api
+    networks:
+      - db-net
 
   frontend:
     build:
       context: ./
       dockerfile: docker/frontend/Dockerfile
     container_name: frontend
+    command : npm start
     volumes:
       - ./frontend:/app
     depends_on:
       - api
     ports:
-      - "80:80"
+      - "3000:3000"
+    networks:
+      - db-net
+    stdin_open: true
 
-  nginx_backend_server:
-    build:
-      context: ./
-      dockerfile: docker/nginx/Dockerfile
-    container_name: nginx
-    ports:
-      - "8000:8000"
-    depends_on:
-      - api
-
+networks:
+  db-net:
+    driver: bridge
 #  frontend:
 #    build:
 #      context: ./

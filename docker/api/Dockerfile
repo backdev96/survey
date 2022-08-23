@@ -25,7 +25,7 @@ RUN python -m pip install -U --force-reinstall pip
 
 VOLUME /app
 
-EXPOSE 80
+EXPOSE 8000
 
 ENV NATIONAL_PROJECTS_STATIC_FILES=/app/static
 ENV NATIONAL_PROJECTS_MEDIA_ROOT=/var/www/app/media

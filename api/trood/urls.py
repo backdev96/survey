@@ -5,7 +5,7 @@ from rest_framework.authtoken import views
 from .yasg import urlpatterns as doc_urls
 
 urlpatterns = [
-    path('frontend/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('survey/', include('survey.urls')),
     path('users/', include('users.urls')),
     path('question/', include('answer.urls')),
