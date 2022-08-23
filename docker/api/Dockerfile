@@ -1,5 +1,8 @@
 FROM python:3.9-slim
 
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 # Install the necessary packages
 RUN apt-get update && \
     apt-get install -y \
@@ -20,21 +23,17 @@ ENV DJANGO_SETTINGS_MODULE=trood.settings
 # Upgrade pip to the latest version
 RUN python -m pip install -U --force-reinstall pip
 
-VOLUME /code/api
+VOLUME /app
 
 EXPOSE 80
-
-ENV NATIONAL_PROJECTS_DB_USER=survey
-ENV NATIONAL_PROJECTS_DB_PASSWORD=survey
-ENV NATIONAL_PROJECTS_DB_NAME=survey
-ENV NATIONAL_PROJECTS_DB_HOST=database
-ENV NATIONAL_PROJECTS_DB_PORT=5432
 
 ENV NATIONAL_PROJECTS_STATIC_FILES=/app/static
 ENV NATIONAL_PROJECTS_MEDIA_ROOT=/var/www/app/media
 VOLUME /var/www/app/media
 
-COPY /api/requirements.txt /code/api/
-RUN pip install -r /code/api/requirements.txt
+COPY /api /app
+WORKDIR /app
 
-CMD python3 manage.py runserver
+RUN pip3 install -r requirements.txt
+
+CMD python manage.py runserver

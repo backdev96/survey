@@ -1,10 +1,8 @@
 # версия docker-compose
 version: '3.8'
 
-
 volumes:
   postgres_data:  
-
 
 services:
   database:
@@ -17,15 +15,19 @@ services:
       - "5432"
     ports:
       - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-survey}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-survey}
+      DB_NAME: ${POSTGRES_DB:-survey}
+
   api:
     build:
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: docker/api/Dockerfile
     restart: always
     command: bash -c "
-            cd /code/api &&
-            python manage.py migrate &&
-            python manage.py runserver 0.0.0.0:8000"
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     depends_on:
@@ -35,20 +37,20 @@ services:
     volumes:
       - ./api/:/code/api
 
-  admin:
-    build:
-      context: ./
-      dockerfile: docker/admin/Dockerfile
-    container_name: np-admin-dev
-    depends_on:
-      - api
-    expose:
-      - "8081"
-    ports:
-      - "${NP_ADMIN_PORT:-8081}:8081"
-    environment:
-      VITE_API_URL: "http://localhost:${NP_API_PORT:-8000}"
-    volumes:
-      - ./src/admin/:/app/
-      # Add container-only node modules to avoid huge FS I/O overhead
-      - /app/node_modules/
+#  admin:
+#    build:
+#      context: ./
+#      dockerfile: docker/admin/Dockerfile
+#    container_name: np-admin-dev
+#    depends_on:
+#      - api
+#    expose:
+#      - "8081"
+#    ports:
+#      - "${NP_ADMIN_PORT:-8081}:8081"
+#    environment:
+#      VITE_API_URL: "http://localhost:${NP_API_PORT:-8000}"
+#    volumes:
+#      - ./src/admin/:/app/
+#      # Add container-only node modules to avoid huge FS I/O overhead
+#      - /app/node_modules/
