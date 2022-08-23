@@ -43,4 +43,3 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: backdev96/trood:main
           tag_with_ref: true
-

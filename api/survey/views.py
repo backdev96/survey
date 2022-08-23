@@ -10,6 +10,7 @@ from .models import Survey
 from .permissions import OwnerOrReadOnly
 from .serializers import SurveyCreateSerializer, SurveyListSerializer
 
+
 class SurveyViewSet(
     GenericViewSet,
     ListModelMixin,
