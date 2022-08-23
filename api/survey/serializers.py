@@ -8,7 +8,9 @@ from .models import Survey
 
 
 class SurveyListSerializer(serializers.ModelSerializer):
-    '''Survey list serializer shows short info about all surveys'''
+    """
+    Survey list serializer shows short info about all surveys
+    """
     class Meta:
         fields = (
             'id',
@@ -19,7 +21,9 @@ class SurveyListSerializer(serializers.ModelSerializer):
 
 
 class SurveyCreateSerializer(SurveyListSerializer):
-    '''Survey create serializer shows full picture of survey'''
+    """
+    Survey create serializer shows full picture of survey
+    """
 
     class Meta(SurveyListSerializer.Meta):
         fields = ('questions', 'author') + SurveyListSerializer.Meta.fields

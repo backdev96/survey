@@ -110,7 +110,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+/api/node_modules
 # Spyder project settings
 .spyderproject
 .spyproject

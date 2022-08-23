@@ -1,7 +1,7 @@
 from django.db import models
 
 from question.models import OptionType, Question
-from survey.models import User
+from users.models import User
 
 
 class Answer(models.Model):

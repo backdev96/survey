@@ -4,9 +4,14 @@ from rest_framework.authtoken import views
 
 from .yasg import urlpatterns as doc_urls
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('survey.urls')),
+    path('survey/', include('survey.urls')),
+    path('users/', include('users.urls')),
+    path('question/', include('answer.urls')),
+    path('answer/', include('question.urls')),
     path('api-token-auth/', views.obtain_auth_token),
 ]
 

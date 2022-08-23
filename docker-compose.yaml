@@ -7,7 +7,6 @@ volumes:
 
 
 services:
-
   database:
     image: postgres:12.0-alpine
     volumes:
@@ -18,11 +17,13 @@ services:
       - "5432"
     ports:
       - "5432:5432"
-  web:
-    image: backdev96/trood:latest
-    build: .
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
     restart: always
     command: bash -c "
+            cd /code/api &&
             python manage.py migrate &&
             python manage.py runserver 0.0.0.0:8000"
     volumes:
@@ -33,3 +34,5 @@ services:
       - database
     env_file:
       - ./.env
+    volumes:
+      - ./api/:/code/api

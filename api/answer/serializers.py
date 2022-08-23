@@ -22,8 +22,9 @@ class AnswerSerializer(serializers.ModelSerializer):
     )
 
     def validate(self, data):
-        '''Call the instance's validate() method and
-        raise error if user has already added a answer for this question.
+        '''
+        Call the instance's validate() method and
+        raise error if user has already added an answer for this question.
         '''
         question_id = self.context.get('request').parser_context['kwargs']['question_id']
         if (Answer.objects.filter(question_id=question_id, respondent=self.context['request'].user).exists()
