@@ -8,7 +8,7 @@ environ.Env.read_env()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = 'django-insecure-$=u^*#e+(@uuz&*tmolg+kjihed#ph&32@wqh4tnmjj&fdansv'
+SECRET_KEY = 'change me'
 
 
 DEBUG = True
