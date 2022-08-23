@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'djoser',
     'question',
-    'answer'
+    'answer',
+    'users',
 ]
 
 MIDDLEWARE = [
