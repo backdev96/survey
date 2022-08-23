@@ -1,5 +1,4 @@
 from django.db import models
-
 from question.models import OptionType, Question
 from users.models import User
 

@@ -1,8 +1,9 @@
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework.generics import GenericAPIView, CreateAPIView
-from rest_framework.response import Response
+from rest_framework.generics import CreateAPIView, GenericAPIView
 from rest_framework.permissions import AllowAny
-from users.serializers import LoginSerializer, LoginResponseSerializer, RegisterSerializer
+from rest_framework.response import Response
+from users.serializers import (LoginResponseSerializer, LoginSerializer,
+                               RegisterSerializer)
 
 
 # Create your views here.

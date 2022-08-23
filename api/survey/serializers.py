@@ -1,8 +1,7 @@
 from django.core.exceptions import ValidationError
-from rest_framework import serializers
-
 from question.models import Question
 from question.serializers import QuestionCreateSerializer
+from rest_framework import serializers
 
 from .models import Survey
 

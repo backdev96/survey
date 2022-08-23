@@ -1,9 +1,8 @@
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
-from users.models import User
-
 from rest_framework.authtoken.models import Token
 from rest_framework.validators import UniqueValidator
-from django.contrib.auth.password_validation import validate_password
+from users.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):

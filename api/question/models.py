@@ -1,6 +1,5 @@
 from django.db import models
 from djchoices import ChoiceItem, DjangoChoices
-
 from survey.models import Survey
 from users.models import User
 

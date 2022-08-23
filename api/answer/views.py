@@ -1,9 +1,8 @@
 from django.shortcuts import get_object_or_404
 from drf_yasg.utils import swagger_auto_schema
+from question.models import Question
 from rest_framework import status, viewsets
 from rest_framework.response import Response
-
-from question.models import Question
 
 from .models import Answer
 from .serializers import AnswerSerializer
