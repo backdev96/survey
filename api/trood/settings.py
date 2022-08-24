@@ -76,13 +76,13 @@ DATABASES = {
 }
 
 CHANNEL_LAYERS = {
-        'default' : {
+        'default': {
             'BACKEND': 'channels_redis.core.RedisChannelLayer',
-            'CONFIG' : {
-                "hosts" : [('redis', 6379)], # You are supposed to use service name and not localhost
-                },
+            'CONFIG': {
+                "hosts": [('redis', 6379)],  # You are supposed to use service name and not localhost
             },
-        }
+        },
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
